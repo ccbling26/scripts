@@ -27,6 +27,7 @@ type Pool struct {
 	workers  uint64
 	status   int64
 	tasks    chan *Task
+	wg       sync.WaitGroup
 	sync.Mutex
 }
 
@@ -59,6 +60,7 @@ func (p *Pool) Close() {
 		time.Sleep(1 * time.Millisecond)
 	}
 	close(p.tasks)
+	p.wg.Wait()
 }
 
 func (p *Pool) Put(task *Task) error {
@@ -75,11 +77,13 @@ func (p *Pool) Put(task *Task) error {
 }
 
 func (p *Pool) run() {
+	p.wg.Add(1)
 	go func() {
 		defer func() {
 			p.Lock()
 			p.workers--
 			p.Unlock()
+			p.wg.Done()
 			if r := recover(); r != nil {
 				log.Printf("Worker panic: %s\n", r)
 			}
