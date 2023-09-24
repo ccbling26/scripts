@@ -1,5 +1,6 @@
 # 随笔脚本
 - [大数相加](./src/add.py)
+- [交替打印](./src/alternating_print.go)
 - [银行家算法](./src/banker.py)
 - [分布式锁](./src/distributed_lock.py)
 - [原地构建小根堆](./src/heap.py)

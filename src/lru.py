@@ -34,6 +34,10 @@ class LRU:
         return node.val
 
     def set(self, key: str, val: Any):
+        if key in self.data:
+            self.get(key)
+            self.data[key].val = val
+            return
         if self.length == self.cap:
             self._del(self.head.nxt.key)
         self.length += 1
