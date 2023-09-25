@@ -5,6 +5,7 @@
 - [分布式锁](./src/distributed_lock.py)
 - [原地构建小根堆](./src/heap.py)
 - [KMP](./src/kmp.py)
+- [LFU](./src/lfu.py)
 - [LRU](./src/lru.py)
 - [协程池](./src/pool.go)
 - [排序算法](./src/sorts.py)
